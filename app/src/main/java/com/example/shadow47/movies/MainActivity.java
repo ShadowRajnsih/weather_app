@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         }
                                     });
-                                    Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                                    Intent intent = new Intent(MainActivity.this, Navigation.class);
                                     startActivity(intent);
                                     finish();
                                 }
