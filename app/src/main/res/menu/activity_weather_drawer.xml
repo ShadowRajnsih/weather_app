@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_weather"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Weather" />
+        <item
+            android:id="@+id/nav_timing"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Timing" />
+        <item
+            android:id="@+id/nav_aboutUs"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="About Us" />
+    </group>
+
+</menu>

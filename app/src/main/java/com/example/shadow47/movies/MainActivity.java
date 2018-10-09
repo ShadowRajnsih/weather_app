@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         }
                                     });
-                                    Intent intent = new Intent(MainActivity.this, Navigation.class);
+                                    Intent intent = new Intent(MainActivity.this, Weather.class);
                                     startActivity(intent);
                                     finish();
                                 }
