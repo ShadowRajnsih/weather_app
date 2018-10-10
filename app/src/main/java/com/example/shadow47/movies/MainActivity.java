@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailstr =email.getText().toString();
+                final String emailstr =email.getText().toString();
                 final String passwordstr =password .getText().toString();
 
                 if (TextUtils.isEmpty(emailstr)) {
@@ -114,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                     });
                                     Intent intent = new Intent(MainActivity.this, Weather.class);
+                                    intent.putExtra("email",emailstr);
+
                                     startActivity(intent);
                                     finish();
                                 }

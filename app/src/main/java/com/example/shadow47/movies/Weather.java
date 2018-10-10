@@ -1,6 +1,9 @@
 package com.example.shadow47.movies;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -15,6 +18,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+
+import io.github.yavski.fabspeeddial.FabSpeedDial;
 
 public class Weather extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,15 +34,38 @@ public class Weather extends AppCompatActivity
         setContentView(R.layout.activity_weather);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        TextView t=(TextView)findViewById(R.id.myemail);
+       // t.setText(getIntent().getExtras().getString("email"));  shared text not working
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FabSpeedDial fabSpeedDial=(FabSpeedDial) findViewById(R.id.fabSpeedDail);
+        fabSpeedDial.setMenuListener(new FabSpeedDial.MenuListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public boolean onPrepareMenu(NavigationMenu navigationMenu) {
+
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemSelected(MenuItem menuItem) //for deep Links for other app
+            {
+                Toast.makeText(Weather.this,""+menuItem.getTitle(),Toast.LENGTH_SHORT).show();
+                Intent deepLink;
+
+
+                    Toast.makeText(Weather.this,""+menuItem.getTitle(),Toast.LENGTH_SHORT).show();
+                    deepLink=new Intent(Intent.ACTION_VIEW,Uri.parse("https://darksky.net/forecast/40.7127,-74.0059/us12/en"));
+
+                    startActivity(deepLink);
+
+                return true;
+            }
+
+            @Override
+            public void onMenuClosed() {
+
             }
         });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -72,7 +104,10 @@ public class Weather extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.signOut) // need to place Signout fuction here
         {
-            return true;
+            FirebaseAuth.getInstance().signOut();
+            Intent intent=new Intent(Weather.this,MainActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -91,12 +126,8 @@ public class Weather extends AppCompatActivity
 
 
         }
-        else
-        if (id == R.id.nav_timing)
-        {
-            fragment=new timingFragment();
 
-        }
+
         else
         if(id== R.id.nav_aboutUs)
         {
